@@ -61,3 +61,23 @@ pub fn ensure_parachain<OuterOrigin>(o: OuterOrigin) -> result::Result<ParaId, B
 		_ => Err(BadOrigin),
 	}
 }
+
+#[doc(hidden)]
+pub mod dummy {
+	// There is no way to register an origin type in `construct_runtime` without a pallet the origin belongs
+	// to.
+	//
+	// However, in this case, the origin doesn't belong to a particular pallet, but rather is meant to
+	// be shared among multiple pallets. Instead of choosing an arbitrary Module to attach the origin
+	// to, we declare a dummy module that doesn't do anything and just serves as a home base for the
+	// origin.
+	//
+	// ideally, though, the `construct_runtime` should support a free-standing origin.
+
+	pub use super::Origin;
+
+	pub trait Trait: frame_system::Trait {}
+	frame_support::decl_module! {
+		pub struct Module<T: Trait> for enum Call where origin: <T as frame_system::Trait>::Origin {}
+	}
+}
