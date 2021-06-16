@@ -19,7 +19,7 @@ sp-application-crypto = { git = "https://github.com/paritytech/substrate", branc
 sp-core = { git = "https://github.com/paritytech/substrate", branch = "master", features = ["std"]  }
 sp-keystore = { git = "https://github.com/paritytech/substrate", branch = "master" }
 thiserror = "1.0.23"
-rand = "0.8.3"
+rand = "0.8.4"
 lru = "0.6.5"
 
 [dev-dependencies]
